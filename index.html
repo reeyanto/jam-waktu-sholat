@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Waktu Sholat &mdash; Aplikasi Penunjuk Waktu Sholat</title>
+
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/fontawesome.min.css">
+  <link rel="stylesheet" href="css/solid.min.css">
+  <style>
+    body {
+      background-image: url('img/kaaba.jpg');
+      background-size: cover;
+      background-attachment: fixed;
+    }
+
+    #masjid, #jam, footer h2 {
+      font-weight:900;
+    }
+  </style>
+</head>
+<body>
+  <header class="container-fluid py-4 bg-white" style="--bs-bg-opacity: .45;">
+    <div class="row">
+      <div class="col-10">
+        <h1 id="masjid"></h1>
+        <h2 id="alamat"></h2>
+        <h3 id="lokasi"></h3>
+      </div>
+
+      <div class="col-2 text-end">
+        <h2 id="hari"></h2>
+        <h4 id="tanggal"></h4>
+        <h1 id="jam"></h1>
+      </div>
+    </div>
+  </header>
+  
+  <!-- Modal -->
+  <div class="modal fade" id="modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel"><i class="fas fa-cog"></i> Konfigurasi Jam Waktu Sholat</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="closeModal()"></button>
+        </div>
+        <div class="modal-body">
+          <div class="mb-3">
+            <label for="masjid" class="form-label">Nama Masjid</label>
+            <input type="text" class="form-control" id="modal-masjid">
+          </div>
+          <div class="mb-3">
+            <label for="alamat" class="form-label">Alamat</label>
+            <input type="text" class="form-control" id="modal-alamat">
+          </div>
+          <div class="mb-3">
+            <label for="kabupaten" class="form-label">Kabupaten</label>
+            <select name="modal-kabupaten" id="modal-kabupaten" class="form-control">
+            </select>
+          </div>
+          <div>
+            <label for="kabupaten" class="form-label">Teks Berjalan</label>
+            <textarea name="modal-teks" id="modal-teks" cols="100%" rows="5" class="form-control" style="resize: none;"></textarea>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-success" data-bs-dismiss="modal" onclick="saveConfiguration()">
+            <i class="fas fa-save mr-4"></i> Simpan
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <footer class="container-fluid fixed-bottom">
+    <div class="row">
+      <div class="col-2 text-center">
+        <div class="card" id="card-imsak">
+          <div class="card-body">
+            <h3>Imsak</h3>
+            <h2 id="w-imsak"></h2>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-2 text-center">
+        <div class="card" id="card-subuh">
+          <div class="card-body">
+            <h3>Subuh</h3>
+            <h2 id="w-subuh"></h2>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-2 text-center">
+        <div class="card" id="card-dzuhur">
+          <div class="card-body">
+            <h3>Dzuhur</h3>
+            <h2 id="w-dzuhur"></h2>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-2 text-center">
+        <div class="card" id="card-ashar">
+          <div class="card-body">
+            <h3>Ashar</h3>
+            <h2 id="w-ashar"></h2>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-2 text-center">
+        <div class="card" id="card-maghrib">
+          <div class="card-body">
+            <h3>Maghrib</h3>
+            <h2 id="w-maghrib"></h2>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-2 text-center">
+        <div class="card" id="card-isya">
+          <div class="card-body">
+            <h3>Isya</h3>
+            <h2 id="w-isya"></h2>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="row">
+      <div class="col-12 mt-4 pt-2 bg-dark">
+        <marquee class="text-white">
+          <h3 id="teks"></h3>
+        </marquee>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/fontawesome.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

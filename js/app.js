@@ -9,6 +9,7 @@
  * Data dari API https://api.myquran.com (terima kasih myquran.com)
  */
 const BASE_URL = 'https://api.myquran.com/v1/sholat';
+let KODE       = '';
 
 /**
  * berguna untuk membaca file config.json yang berisi konfigurasi nama masjid, alamat, kode (kabupaten) dan running teks
@@ -29,11 +30,14 @@ function init() {
       document.querySelector('#modal-alamat').value = config.alamat;
       document.querySelector('#modal-teks').value   = config.teks;
 
+      // atur KODE (kabupaten)
+      KODE = config.kode;
+
       prayerTime(config.kode);
       setInterval(showDateTime, 1000);
       showModal();
     })
-    .catch(error => alert('Tidak dapat membuka file \'config.json\''));
+    .catch(error => alert('Tidak dapat membuka file \'config.json\'\n'+ error));
 }
 
 /**
@@ -44,8 +48,6 @@ function prayerTime(kodeKabupaten) {
   const d   = new Date();
   const bln = ((d.getMonth()+1) < 10) ? "0".concat(d.getMonth()+1) : d.getMonth()+1;
   const tgl = (d.getDate() < 10) ? "0".concat() : d.getDate();
-
-  console.log(BASE_URL +'/jadwal/'+ kodeKabupaten +'/'+ d.getFullYear() +'/'+ bln +'/'+ tgl);
 
   fetch(BASE_URL +'/jadwal/'+ kodeKabupaten +'/'+ d.getFullYear() +'/'+ bln +'/'+ tgl)
     .then(response    => response.json())
@@ -138,8 +140,8 @@ function showModal() {
       modal.removeAttribute('aria-hidden');
 
       // menampilkan daftar kabupaten (ID dan Nama Kabupaten) pada combobox
-      let modalKabupaten = document.querySelector('#modal-kabupaten');
-      console.log(modalKabupaten.length);
+      let modalKabupaten      = document.querySelector('#modal-kabupaten');
+      modalKabupaten.value    = null;
 
       fetch(BASE_URL +'/kota/semua')
         .then(response   => response.json())
@@ -148,6 +150,11 @@ function showModal() {
             let item          = document.createElement('option');
             item.textContent  = kabupaten[i].lokasi;
             item.value        = kabupaten[i].id;
+
+            // selected?
+            if(kabupaten[i].id == KODE) {
+              item.setAttribute('selected', 'selected');
+            }
 
             modalKabupaten.appendChild(item);
           }
@@ -175,7 +182,16 @@ function closeModal() {
  * lalu menutup modal
  */
 function saveConfiguration() {
+  const masjid    = document.querySelector('#modal-masjid').value;
+  const alamat    = document.querySelector('#modal-alamat').value;
+  const kabupaten = document.querySelector('#modal-kabupaten').value;
+  const teks      = document.querySelector('#modal-teks').value;
 
+  const blob = new Blob(['{"masjid":"'+ masjid +'", "alamat":"'+ alamat +'", "kode":"'+ kabupaten +'", "teks":"'+ teks +'"}'], {
+    type: "text/plain;charset=utf-8"
+  });
+  saveAs(blob, "config.json");
+  
   closeModal();
 }
 

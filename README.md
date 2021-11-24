@@ -3,6 +3,9 @@
 ## Deskripsi
 Jam Waktu Sholat (JWS) merupakan aplikasi penunjuk waktu sholat digital berbasis web, dibuat menggunakan CSS Framework Bootstrap v5 dan VanillaJS. Sumber datanya sendiri didasarkan pada API https://api.myquran.com (thanks).
 
+## Instalasi
+Lakukan <i>download</i> repository ini kedalam sebuah web server, rename folder menjadi <b>jws</b> lalu akses melalui web browser dengan alamat <b>http://localhost/jws</b>
+
 ## Kontribusi
 Saya sangat mengapresiasi kepada siapa saja yang berkontribusi pada project sederhana ini. Silakan langsung <i>Fork</i> dan berikan <i>Star</i> untuk repository ini
 

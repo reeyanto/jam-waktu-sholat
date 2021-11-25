@@ -98,6 +98,11 @@ function showCurrentPrayerTime() {
   for(let i=0; i<wJadwal.length; i++) {
     if(currentTime == document.querySelector(wJadwal[i]).textContent) {
       document.querySelector(cardJadwal[i]).classList.add(background, foreground);
+
+      //bunyikan beep
+      if(document.querySelector('#jam').textContent.substr(6, 2) < 10) {
+        beep();
+      }
     }
     else {
       document.querySelector(cardJadwal[i]).classList.remove(background, foreground);
@@ -179,5 +184,16 @@ function saveConfiguration() {
 
   closeModal();
 }
+
+
+/**
+ * bunyikan beep (alert)
+ * dipanggil saat tiba waktu sholat selama 10 detik
+ */
+function beep() {
+  let audio = document.querySelector('#audio');
+  audio.play();
+}
+
 
 init();

@@ -91,32 +91,17 @@ function showCurrentPrayerTime() {
   let background  = 'bg-danger';
   let foreground  = 'text-light';
   let currentTime = document.querySelector('#jam').textContent.substr(0, 5);
-  let cardList    = ['imsak', 'subuh', 'dzuhur', 'ashar', 'maghrib', 'isya'];
 
-  // hapus background pada card
-  cardList.forEach(element => {
-    let item = '#card-'+ element;
-    document.querySelector(item).classList.remove(background);
-  });
+  let wJadwal     = ['#w-imsak', '#w-subuh', '#w-dzuhur', '#w-ashar', '#w-maghrib', '#w-isya'];
+  let cardJadwal  = ['#card-imsak', '#card-subuh', '#card-dzuhur', '#card-ashar', '#card-maghrib', '#card-isya'];
 
-  // tentukan card yang seharusnya aktif
-  if((currentTime >= document.querySelector('#w-imsak').textContent) && (currentTime < document.querySelector('#w-subuh').textContent)) {
-    document.querySelector('#card-imsak').classList.add(background, foreground);
-  }
-  else if((currentTime >= document.querySelector('#w-subuh').textContent) && (currentTime < document.querySelector('#w-dzuhur').textContent)) {
-    document.querySelector('#card-subuh').classList.add(background, foreground);
-  }
-  else if((currentTime >= document.querySelector('#w-dzuhur').textContent) && (currentTime < document.querySelector('#w-ashar').textContent)) {
-    document.querySelector('#card-dzuhur').classList.add(background, foreground);
-  }
-  else if((currentTime >= document.querySelector('#w-ashar').textContent) && (currentTime < document.querySelector('#w-maghrib').textContent)) {
-    document.querySelector('#card-ashar').classList.add(background, foreground);
-  }
-  else if((currentTime >= document.querySelector('#w-maghrib').textContent) && (currentTime < document.querySelector('#w-isya').textContent)) {
-    document.querySelector('#card-maghrib').classList.add(background, foreground);
-  }
-  else {
-    document.querySelector('#card-isya').classList.add(background, foreground);
+  for(let i=0; i<wJadwal.length; i++) {
+    if(currentTime == document.querySelector(wJadwal[i]).textContent) {
+      document.querySelector(cardJadwal[i]).classList.add(background, foreground);
+    }
+    else {
+      document.querySelector(cardJadwal[i]).classList.remove(background, foreground);
+    }
   }
 
   // perlu hit API lagi?
@@ -191,7 +176,7 @@ function saveConfiguration() {
     type: "text/plain;charset=utf-8"
   });
   saveAs(blob, "config.json");
-  
+
   closeModal();
 }
 

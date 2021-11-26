@@ -55,6 +55,13 @@ function prayerTime(kodeKabupaten) {
       document.querySelector('#w-imsak').textContent    = waktuSholat.data.jadwal.imsak;
       document.querySelector('#w-subuh').textContent    = waktuSholat.data.jadwal.subuh;
       document.querySelector('#w-dzuhur').textContent   = waktuSholat.data.jadwal.dzuhur;
+
+      // khusus hari Jum'at, ganti label Dzuhur menjadi Jum'at
+      if(document.querySelector('#hari').textContent == 'Jum\'at') 
+        document.querySelector('#label-dzuhur').textContent = 'Jum\'at';
+      else
+        document.querySelector('#label-dzuhur').textContent = 'Dzuhur';
+
       document.querySelector('#w-ashar').textContent    = waktuSholat.data.jadwal.ashar;
       document.querySelector('#w-maghrib').textContent  = waktuSholat.data.jadwal.maghrib;
       document.querySelector('#w-isya').textContent     = waktuSholat.data.jadwal.isya;

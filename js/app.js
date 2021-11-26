@@ -68,7 +68,7 @@ function prayerTime(kodeKabupaten) {
 
       document.querySelector('#lokasi').textContent     = waktuSholat.data.lokasi +', '+ waktuSholat.data.daerah;
     })
-    .catch(error => alert('Tidak dapat terhubung ke Restfull API\n'+ error));
+    .catch(error => alert('Tidak dapat terhubung ke RESTFull API, pastikan koneksi internet stabil\n'+ error));
 }
 
 /**

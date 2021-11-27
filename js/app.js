@@ -123,11 +123,13 @@ function showCurrentPrayerTime() {
 
 /**
  * mendengarkan event dari keyboard
- * apabila user menekan tombol Escape, tampilkan modal bootstrap berisi konfigurasi JWS
+ * apabila user menekan tombol Backquote, tampilkan modal bootstrap berisi konfigurasi JWS
+ * apabila user menekan tombol Escape, tutup modal
  */
 function showModal() {
   document.addEventListener('keypress', (key) => {
-    if(key.code == 'Escape') {
+    console.log(key.code);
+    if(key.code == 'Backquote') {
       const modal = document.querySelector('#modal');
 
       modal.classList.add('show');
@@ -157,6 +159,9 @@ function showModal() {
           }
         })
         .catch(error => alert('Gagal mendapatkan daftar kota\n'+ error));
+    }
+    else if(key.code == 'Escape') {
+      closeModal();
     }
   });
 }
